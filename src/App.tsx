@@ -12,7 +12,7 @@ function App() {
   //   const response = await fetch(
   //     "https://dog.ceo/api/breeds/image/random"
   //   )
-  //   const jsonBody: : Dog[] = await response.json();
+  //   const jsonBody: Dog = await response.json();
   //   setDog(jsonBody[0]);
   //   console.log(jsonBody[0])
   // };
@@ -20,20 +20,16 @@ function App() {
   const handleGetDog = () => {
     fetch("https://dog.ceo/api/breeds/image/random")
       .then((response) => response.json())
-      .then((jsonBody: Dog[]) => setDog(jsonBody[0]));
+      .then((jsonBody: Dog) => setDog(jsonBody));
   };
 
   if (dog) {
     return (
       <div>
         <h1>Dog app</h1>
-        <details>
         <p>
-          {/* <img src = {dog.message} alt = ''/> */}
-          {dog.status}
+          <img src = {dog.message} alt = ''/>
         </p>
-        </details>
-        <hr />
         <button onClick={handleGetDog}>Get another dog</button>
       </div>
     );
