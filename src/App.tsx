@@ -7,8 +7,7 @@ interface Dog {
 
 function App() {
   const [dog, setDog] = useState<Dog>();
-  const [storedDogs, setStoredDogs] = useState<(string|undefined)[]>([]);
-
+  const [storedDogs, setStoredDogs] = useState<string[]>([]);
   // const handleGetDog = async () => {
   //   const response = await fetch(
   //     "https://dog.ceo/api/breeds/image/random"
@@ -21,8 +20,10 @@ function App() {
   const handleGetDog = () => {
     fetch("https://dog.ceo/api/breeds/image/random")
       .then((response) => response.json())
-      .then((jsonBody: Dog) => setDog(jsonBody));
-      setStoredDogs([...storedDogs, dog?.message])
+      .then((fetchedDog: Dog) => {
+        setDog(fetchedDog); 
+        setStoredDogs([...storedDogs, fetchedDog.message])
+      });
   };
 
   if (dog) {
