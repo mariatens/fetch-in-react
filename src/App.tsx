@@ -7,6 +7,7 @@ interface Dog {
 
 function App() {
   const [dog, setDog] = useState<Dog>();
+  const [storedDogs, setStoredDogs] = useState<(string|undefined)[]>([]);
 
   // const handleGetDog = async () => {
   //   const response = await fetch(
@@ -21,6 +22,7 @@ function App() {
     fetch("https://dog.ceo/api/breeds/image/random")
       .then((response) => response.json())
       .then((jsonBody: Dog) => setDog(jsonBody));
+      setStoredDogs([...storedDogs, dog?.message])
   };
 
   if (dog) {
@@ -31,6 +33,9 @@ function App() {
           <img src = {dog.message} alt = ''/>
         </p>
         <button onClick={handleGetDog}>Get another dog</button>
+        <p>
+      {storedDogs.map((eachImg) => <img key = {eachImg} src = {eachImg} alt  = ''/>)}
+        </p>
       </div>
     );
   } else {
